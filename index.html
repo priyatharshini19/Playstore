@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Play Store Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+    h2 { text-align: center; }
+    .chart-container { margin: 40px auto; width: 95%; }
+  </style>
+</head>
+<body>
+
+  <h2>📊 Play Store Data Dashboard</h2>
+
+  <!-- Bubble Chart -->
+  <div class="chart-container">
+    <h3>Bubble Chart: App Size vs Rating</h3>
+    <div id="bubbleChart"></div>
+  </div>
+
+  <!-- Grouped Bar Chart -->
+  <div class="chart-container">
+    <h3>Grouped Bar Chart: Ratings vs Reviews</h3>
+    <div id="groupedBar"></div>
+  </div>
+
+  <!-- Line Chart -->
+  <div class="chart-container">
+    <h3>Line Chart: Average Rating Trend</h3>
+    <div id="lineChart"></div>
+  </div>
+
+  <!-- Histogram -->
+  <div class="chart-container">
+    <h3>Histogram: App Size Distribution</h3>
+    <div id="histogram"></div>
+  </div>
+
+  <!-- Stacked Area Chart -->
+  <div class="chart-container">
+    <h3>Stacked Area Chart: Cumulative Installs Over Time</h3>
+    <div id="stackedArea"></div>
+  </div>
+
+  <!-- Choropleth Map -->
+  <div class="chart-container">
+    <h3>Choropleth Map: Global Installs by Category</h3>
+    <div id="choroplethMap"></div>
+  </div>
+
+  <!-- Time Series Line Chart -->
+  <div class="chart-container">
+    <h3>Time Series: Total Installs Trend</h3>
+    <div id="timeSeries"></div>
+  </div>
+
+<script>
+  // ---------------- Bubble Chart ----------------
+  var bubbleData = [{
+    x: [20, 40, 60, 80],
+    y: [4.0, 4.2, 4.5, 4.7],
+    text: ["Game", "सौंदर्य", "வணிகம்", "Dating"],
+    mode: 'markers',
+    marker: {
+      size: [500, 800, 1200, 1500],
+      color: ['pink', 'blue', 'green', 'orange'],
+      opacity: 0.7,
+      line: { width: 1, color: 'black' }
+    }
+  }];
+  Plotly.newPlot('bubbleChart', bubbleData, { xaxis:{title:"App Size (MB)"}, yaxis:{title:"Rating"} });
+
+  // ---------------- Grouped Bar Chart ----------------
+  var groupedData = [
+    { x:["Game","Beauty","Business"], y:[4.5,4.2,4.3], name:"Avg Rating", type:"bar" },
+    { x:["Game","Beauty","Business"], y:[2000,1500,1800], name:"Total Reviews", type:"bar" }
+  ];
+  Plotly.newPlot('groupedBar', groupedData, { barmode:'group', title:"Ratings vs Reviews" });
+
+  // ---------------- Line Chart ----------------
+  var lineData = [
+    { x:["Jan","Feb","Mar"], y:[4.1,4.3,4.5], mode:"lines+markers", name:"Game" },
+    { x:["Jan","Feb","Mar"], y:[4.0,4.2,4.4], mode:"lines+markers", name:"Beauty" }
+  ];
+  Plotly.newPlot('lineChart', lineData, { title:"Average Rating Trend" });
+
+  // ---------------- Histogram ----------------
+  var histData = [{ x:[25,30,40,50,60,70,80], type:"histogram", marker:{color:"purple"} }];
+  Plotly.newPlot('histogram', histData, { title:"App Size Distribution" });
+
+  // ---------------- Stacked Area Chart ----------------
+  var stackedData = [
+    { x:["Jan","Feb","Mar"], y:[1000,2000,3500], stackgroup:'one', name:"Game" },
+    { x:["Jan","Feb","Mar"], y:[800,1500,2500], stackgroup:'one', name:"सौंदर्य" },
+    { x:["Jan","Feb","Mar"], y:[600,1200,2000], stackgroup:'one', name:"வணிகம்" }
+  ];
+  Plotly.newPlot('stackedArea', stackedData, { title:"Cumulative Installs Over Time" });
+
+  // ---------------- Choropleth Map ----------------
+  var choroplethData = [{
+    type:'choropleth',
+    locations:["India","USA","Germany","Brazil"],
+    locationmode:'country names',
+    z:[500000,800000,300000,600000],
+    text:["Game","Entertainment","Partnersuche","Social"],
+    colorscale:'Viridis'
+  }];
+  Plotly.newPlot('choroplethMap', choroplethData, { title:"Global Installs by Category" });
+
+  // ---------------- Time Series Line Chart ----------------
+  var timeSeriesData = [
+    { x:["2025-01","2025-02","2025-03"], y:[1000,1200,1500], mode:'lines+markers', name:"Game" },
+    { x:["2025-01","2025-02","2025-03"], y:[800,950,1300], mode:'lines+markers', name:"सौंदर्य" },
+    { x:["2025-01","2025-02","2025-03"], y:[600,700,900], mode:'lines+markers', name:"வணிகம்" }
+  ];
+  Plotly.newPlot('timeSeries', timeSeriesData, { title:"Total Installs Trend Over Time" });
+
+</script>
+</body>
+</html>
